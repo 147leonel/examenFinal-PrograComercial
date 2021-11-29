@@ -10,9 +10,9 @@ def curso_nuevo(request):
         if formulario.is_valid():
             curso = Curso.objects.create(nombre=formulario.cleaned_data['nombre'])
             for alumno_id in request.POST.getlist('alumnos'):
-                cursando = Cursando(alumno_id=alumno_id, alumno_id = curso.id)
+                cursando = Cursando(alumno_id=alumno_id, curso_id = curso.id)
                 cursando.save()
             messages.add_message(request, messages.SUCCESS, 'Curso guardado exitosamente')
     else:
         formulario = CursoForm()
-    return render(request, 'curso/curso_editar.html', {'formulario': formulario})
+    return render(request, 'colegio/curso_editar.html', {'formulario': formulario})
